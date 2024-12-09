@@ -20,10 +20,10 @@ class Singleton(type):
 class DbDriverABC(metaclass=Singleton):
     @abstractmethod
     async def get_session(self) -> AsyncGenerator:
-        """Not Implemented"""
+        """ Not Implemented """
 
     @staticmethod
     @abstractmethod
     def __prepare_connection_data(config: BaseSQLConfig):
-        """Not Implemented"""
+        """ Not Implemented """
 

@@ -27,5 +27,6 @@ class EventUpdate(BaseModel):
 
 class EventResponse(EventBase):
     id: int
+
     class Config:
         from_attributes = True

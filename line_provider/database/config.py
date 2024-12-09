@@ -23,4 +23,5 @@ class BaseSQLConfig:
     password: str = os.getenv("POSTGRES_DB_PASSWORD")
     connector: str = "postgresql+asyncpg"
 
+
 db_config = BaseSQLConfig()

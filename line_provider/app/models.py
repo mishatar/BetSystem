@@ -4,6 +4,7 @@ from sqlalchemy.types import DECIMAL
 
 Base = declarative_base()
 
+
 class Event(Base):
     __tablename__ = "events"
 

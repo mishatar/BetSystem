@@ -17,9 +17,7 @@ from .db_driver import DbDriverABC
 
 
 class CConnection(DbDriverABC):
-    """
-    Base Database connection class.
-    """
+    """ Base Database connection class. """
 
     def __init__(self):
         connection_data = self._prepare_connection_data(config=db_config)
@@ -49,8 +47,6 @@ class CConnection(DbDriverABC):
 
     @staticmethod
     def _prepare_connection_data(config: BaseSQLConfig) -> str:
-        """
-        Base hidden prepare connection type.
-        """
+        """ Base hidden prepare connection type. """
 
         return f"{config.connector}://{config.user}:{config.password}@{config.host}:{config.port}/{config.schema}"
