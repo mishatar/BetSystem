@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, CheckConstraint, DateTime
 from sqlalchemy.types import DECIMAL
 from sqlalchemy.orm import declarative_base
 
@@ -10,4 +10,14 @@ class Event(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     coefficient = Column(DECIMAL, nullable=False)
     deadline = Column(DateTime, nullable=False)
-    status = Column(String)
+    status = Column(
+        Integer,
+        nullable=False,
+        comment="1 - NEW, 2 - FINISHED_WIN, 3 - FINISHED_LOSE"
+    )
+    __table_args__ = (
+        CheckConstraint(
+            "status IN (1, 2, 3)",
+            name="check_status_valid_values"
+        ),
+    )
