@@ -1,8 +1,11 @@
-from sqlalchemy.future import select
-from app.models import Event
-from database.db_connection import CConnection
-from app.schemas import EventCreate, EventUpdate
 from typing import List, Optional
+
+from sqlalchemy.future import select
+
+from app.models import Event
+from app.schemas import EventCreate, EventUpdate
+from database.db_connection import CConnection
+
 
 class EventService:
 

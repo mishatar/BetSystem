@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, CheckConstraint, DateTime
-from sqlalchemy.types import DECIMAL
+from sqlalchemy import CheckConstraint, Column, DateTime, Integer
 from sqlalchemy.orm import declarative_base
+from sqlalchemy.types import DECIMAL
 
 Base = declarative_base()
 

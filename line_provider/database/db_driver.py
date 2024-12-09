@@ -1,5 +1,6 @@
 from abc import abstractmethod
-from typing import Dict, Type, AsyncGenerator
+from typing import AsyncGenerator, Dict, Type
+
 from database.config import BaseSQLConfig
 
 
