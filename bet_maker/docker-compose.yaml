@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: bet_maker_fastapi
+    build:
+      context: .
+    ports:
+      - "${APP_HOST_PORT}:5055"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    restart: always
+
+volumes:
+  postgres_data:

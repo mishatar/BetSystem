@@ -1,10 +1,16 @@
+from datetime import datetime
+import os
 from typing import List, Optional
 
 from sqlalchemy.future import select
+import httpx
 
 from app.models import Event
 from app.schemas import EventCreate, EventUpdate
 from database.db_connection import CConnection
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class EventService:
@@ -23,7 +29,7 @@ class EventService:
     async def get_events(self) -> List[Event]:
         """ Fetche all events from the database. """
         async with self.connection.get_session() as session:
-            query = select(Event)
+            query = select(Event).where(Event.deadline > datetime.utcnow())
             result = await session.execute(query)
             return result.scalars().all()
 
@@ -45,11 +51,13 @@ class EventService:
             if not event:
                 raise ValueError("Event not found")
 
-            for key, value in event_data.dict(exclude_unset=True).items():
+            data = event_data.dict(exclude_unset=True)
+            for key, value in data.items():
                 setattr(event, key, value)
 
             await session.commit()
             await session.refresh(event)
+            await notify_bet_maker(event_id, data.get("status"))
             return event
 
     async def delete_event(self, event_id: int) -> Event:
@@ -61,3 +69,16 @@ class EventService:
             await session.delete(event)
             await session.commit()
             return event
+
+
+async def notify_bet_maker(event_id, status):
+    data = {
+        "event_id": event_id,
+        "status": status
+    }
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(os.getenv("BET_MAKER_CALLBACK_URL"), json=data)
+            response.raise_for_status()
+    except httpx.RequestError as e:
+        print(f"Failed to notify bet-maker: {e}")

@@ -1,6 +1,7 @@
-from pydantic import BaseModel
 from datetime import datetime
 from decimal import Decimal
+
+from pydantic import BaseModel
 
 
 class BetCreate(BaseModel):
@@ -12,8 +13,13 @@ class BetResponse(BaseModel):
     id: int
     event_id: int
     amount: Decimal
-    status: str
+    status: int
     timestamp: datetime
 
     class Config:
         orm_mode = True
+
+
+class EventStatusUpdate(BaseModel):
+    event_id: int
+    status: int
