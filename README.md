@@ -12,40 +12,40 @@ BetSystem — это система для управления пользова
 
 1. Клонируйте репозиторий:
 ````
- - git clone https://github.com/mishatar/BetSystem.git
- - cd bet-system
+git clone https://github.com/mishatar/BetSystem.git
+cd bet-system
 ````
 
 2. Добавить .env файл
  - пример для line_provider:
 ````
- - BET_MAKER_CALLBACK_URL = <callback url для обновления статуса в bet_maker>
- - APP_HOST_PORT = <порт сервиса>
- - APP_HOST = <хост сервиса>
- - POSTGRES_DB_USER = <имя пользователя>
- - POSTGRES_DB_PASSWORD = <пароль от пользователя>
- - POSTGRES_DB_HOST_PORT = <порт бд>
- - POSTGRES_DB_HOST = <адрес бд> - host.docker.internal(в случае, если два сервиса работают на локальном компьютере)
- - POSTGRES_DB_NAME = <название бд>
+BET_MAKER_CALLBACK_URL = <callback url для обновления статуса в bet_maker>
+APP_HOST_PORT = <порт сервиса>
+APP_HOST = <хост сервиса>
+POSTGRES_DB_USER = <имя пользователя>
+POSTGRES_DB_PASSWORD = <пароль от пользователя>
+POSTGRES_DB_HOST_PORT = <порт бд>
+POSTGRES_DB_HOST = <адрес бд> - host.docker.internal(в случае, если два сервиса работают на локальном компьютере)
+POSTGRES_DB_NAME = <название бд>
 ````
  - пример для bet_maker:
 ````
- - LINE_PROVIDER_URL = <url для получения событий из line_provider>
- - APP_HOST_PORT = <порт сервиса>
- - APP_HOST = <хост сервиса>
- - POSTGRES_DB_USER = <имя пользователя>
- - POSTGRES_DB_PASSWORD = <пароль от пользователя>
- - POSTGRES_DB_HOST_PORT = <порт бд>
- - POSTGRES_DB_HOST = <адрес бд> - host.docker.internal(в случае, если два сервиса работают на локальном компьютере)
- - POSTGRES_DB_NAME = <название бд>
+LINE_PROVIDER_URL = <url для получения событий из line_provider>
+APP_HOST_PORT = <порт сервиса>
+APP_HOST = <хост сервиса>
+POSTGRES_DB_USER = <имя пользователя>
+POSTGRES_DB_PASSWORD = <пароль от пользователя>
+POSTGRES_DB_HOST_PORT = <порт бд>
+POSTGRES_DB_HOST = <адрес бд> - host.docker.internal(в случае, если два сервиса работают на локальном компьютере)
+POSTGRES_DB_NAME = <название бд>
 ````
 
 3. Запустить миграции
 ````
- - alembic upgrade head
+alembic upgrade head
 ````
 
 4. Собрать и запустить контейнеры для каждого сервиса
-``
- - docker-compose up --build
-``
+````
+docker-compose up --build
+````
