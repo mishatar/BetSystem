@@ -1,4 +1,5 @@
-from sqlalchemy import CheckConstraint, Column, DateTime, Integer, ForeignKey, String
+from sqlalchemy import (CheckConstraint, Column, DateTime, ForeignKey, Integer,
+                        String)
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy.types import DECIMAL
 

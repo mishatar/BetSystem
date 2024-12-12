@@ -1,14 +1,13 @@
-from datetime import datetime
 import os
+from datetime import datetime
 from typing import List, Optional
 
-from sqlalchemy.future import select
 import httpx
-
 from app.models import Event
 from app.schemas import EventCreate, EventUpdate
 from database.db_connection import CConnection
 from dotenv import load_dotenv
+from sqlalchemy.future import select
 
 load_dotenv()
 

@@ -1,6 +1,5 @@
-from fastapi import APIRouter, HTTPException, status
-
 from database.db_connection import CConnection
+from fastapi import APIRouter, HTTPException, status
 
 from .schemas import BetCreate, BetResponse, EventStatusUpdate
 from .service import BetService, get_available_events

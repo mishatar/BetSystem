@@ -1,10 +1,11 @@
+from datetime import datetime
+
 import pytest
+from app.models import Event
+from app.schemas import EventCreate
 from httpx import AsyncClient
 from main import app
-from app.schemas import EventCreate
-from app.models import Event
 from sqlalchemy.ext.asyncio import AsyncSession
-from datetime import datetime
 
 
 @pytest.fixture(scope="module")

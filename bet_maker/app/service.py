@@ -3,11 +3,10 @@ from datetime import datetime
 from typing import List
 
 import httpx
+from database.db_connection import CConnection
 from dotenv import load_dotenv
 from sqlalchemy import update
 from sqlalchemy.future import select
-
-from database.db_connection import CConnection
 
 from .models import Bet
 from .schemas import BetCreate

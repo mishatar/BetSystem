@@ -1,10 +1,11 @@
+from datetime import datetime
+
 import pytest
+from app.models import Bet, Event
+from app.schemas import BetCreate
 from httpx import AsyncClient
 from main import app
-from app.schemas import BetCreate
-from app.models import Bet, Event
 from sqlalchemy.ext.asyncio import AsyncSession
-from datetime import datetime
 
 
 @pytest.fixture(scope="module")

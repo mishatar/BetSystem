@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException, status
-
 from app.schemas import EventCreate, EventResponse, EventUpdate
 from database.db_connection import CConnection
+from fastapi import APIRouter, HTTPException, status
 
 from .service import EventService
 
