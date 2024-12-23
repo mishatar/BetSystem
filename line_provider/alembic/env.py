@@ -25,7 +25,7 @@ from database.db_connection import CConnection
 
 target_metadata = Base.metadata
 
-connection_string = CConnection._prepare_connection_data(db_config)
+connection_string = f"{db_config.connector}://{db_config.user}:{db_config.password}@localhost:{db_config.port}/{db_config.schema}"
 config.set_main_option("sqlalchemy.url", connection_string)
 
 # other values from the config, defined by the needs of env.py,

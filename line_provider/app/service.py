@@ -35,7 +35,16 @@ class EventService:
     async def create_event(self, event_data: EventCreate) -> Event:
         """ Create a new event in the database. """
         async with self.connection.get_session() as session:
-            new_event = Event(**event_data.dict())
+            if event_data.deadline.tzinfo is not None:
+                naive_deadline = event_data.deadline.replace(tzinfo=None)
+            else:
+                naive_deadline = event_data.deadline
+
+            new_event = Event(
+                coefficient=event_data.coefficient,
+                deadline=naive_deadline,
+                status=event_data.status
+            )
             session.add(new_event)
             await session.commit()
             return new_event
@@ -45,19 +54,21 @@ class EventService:
         async with self.connection.get_session() as session:
             query = select(Event).where(Event.id == event_id)
             result = await session.execute(query)
-            event = result.scalar_one_or_none()
-
-            if not event:
+            existing_event = result.scalar_one_or_none()
+            if not existing_event:
                 raise ValueError("Event not found")
 
             data = event_data.dict(exclude_unset=True)
             for key, value in data.items():
-                setattr(event, key, value)
+                if key == "deadline":
+                    if value and value.tzinfo is not None:
+                        value = value.replace(tzinfo=None)
+                setattr(existing_event, key, value)
 
             await session.commit()
-            await session.refresh(event)
+            await session.refresh(existing_event)
             await notify_bet_maker(event_id, data.get("status"))
-            return event
+            return existing_event
 
     async def delete_event(self, event_id: int) -> Event:
         """ Delete event from the database by id. """

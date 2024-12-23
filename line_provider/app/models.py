@@ -34,7 +34,11 @@ class Bet(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     event_id = Column(Integer, ForeignKey("events.id", ondelete="CASCADE"), nullable=False)
     amount = Column(DECIMAL, nullable=False)
-    status = Column(String)
+    status = Column(
+        Integer,
+        nullable=False,
+        comment="1 - NEW, 2 - FINISHED_WIN, 3 - FINISHED_LOSE"
+    )
     timestamp = Column(DateTime, nullable=False)
 
     event = relationship("Event", back_populates="bets")
